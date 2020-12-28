@@ -1,0 +1,11 @@
+zh_CN:
+  js:
+    private_replies:
+      topic_banner: "只有回复本主题的用户能看到本主题的所有回帖"
+      button:
+        public_replies: 
+          button: "切换为公开回复"
+          help: "所有人能看到回帖"
+        private_replies: 
+          button: "切换为隐藏回复"
+          help: "只有回复本主题的用户能看到回帖"

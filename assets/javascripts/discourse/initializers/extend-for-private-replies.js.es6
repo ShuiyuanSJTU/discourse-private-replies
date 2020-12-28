@@ -49,7 +49,7 @@ function registerTopicFooterButtons(api) {
     ],
     displayed() {
       const topic_owner_id = this.get("topic.user_id") ;
-      return this.currentUser && ((this.currentUser.id == topic_owner_id) || this.currentUser.staff);
+      return this.currentUser && ((this.currentUser.id == topic_owner_id) || this.currentUser.admin);
     }
   });
 }
