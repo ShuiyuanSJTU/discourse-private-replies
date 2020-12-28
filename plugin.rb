@@ -41,7 +41,7 @@ after_initialize do
         if !@user
           result = result.where('posts.post_number = 1')
         end
-        if @topic.user.id != @user.id || !@user.admin?   # Topic starter and admin can see it all
+        if @topic.user.id != @user.id && !@user.admin?   # Topic starter and admin can see it all
           replied_users = Post.where('topic_id = ? AND deleted_at IS NULL' ,@topic.id).pluck(:user_id)
           if not (replied_users.include?(@user.id))
             result = result.where('posts.post_number = 1')
@@ -57,9 +57,9 @@ after_initialize do
       @posts = super(post_ids)
       if SiteSetting.private_replies_enabled && @topic.custom_fields.keys.include?('private_replies') && @topic.custom_fields['private_replies']
         if !@user
-          result = result.where('posts.post_number = 1')
+          @posts = @posts.where('posts.post_number = 1')
         end
-        if @topic.user.id != @user.id || !@user.admin?   # Topic starter and admin can see it all
+        if @topic.user.id != @user.id && !@user.admin?   # Topic starter and admin can see it all
           replied_users = Post.where('topic_id = ? AND deleted_at IS NULL' ,@topic.id).pluck(:user_id)
           if not (replied_users.include?(@user.id))
             @posts = @posts.where('posts.post_number = 1')
